@@ -1,5 +1,9 @@
 import "./App.css";
+import Web3 from "web3";
+import { init } from "./Web3Client";
 import Upload from "./components/Upload";
+
+//init();
 
 function App() {
   return (

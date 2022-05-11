@@ -1,5 +1,5 @@
-import Web3 from "web3";
-const web3 = new Web3(window.etherium.currentProvider);
+import web3 from "./web3";
+
 /** * This file stores the address and abi of our smart contract * These values will need to be updated if a smart contract is changed and recompiled */
 /* contract address */
 const address = "0x35f73eddbc7df8ce70661da627fcd6e7b0459329";
