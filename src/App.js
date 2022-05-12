@@ -31,6 +31,7 @@ function App() {
       const accounts = await ethereum.send("eth_requestAccounts");
       const account = accounts.result[0];
       console.log(account);
+      // console.log(contract);
       setAccount(account);
       // Accounts now exposed, use them
     } catch (error) {
@@ -40,16 +41,29 @@ function App() {
     //connect smart contract with web3
     setLoader(false);
     setContract(Web3Data);
+    console.log(Web3Data);
   };
 
   useEffect(() => {
     loadWeb3();
     loadBlockchainData();
-  }, []);
+    console.log(account);
+  }, [contract]);
 
+  const sendDocs=async(hash, date, id, name)=>{
+    await contract.methods.StoreDocument(hash, date, id, name)
+    .send({from : account ,gas: 5000000})
+    .on('transactionHash', function(hash){
+      console.log("Successfully uploaded.")
+      console.log(hash)
+    })
+    // .on("receipt", function (receipt) {
+    //    $("#txStatus").text("Successfully uploaded.");})
+  }
+  
   return (
     <div className="App">
-      <Upload />
+      <Upload sendDocs={sendDocs} />
     </div>
   );
 }

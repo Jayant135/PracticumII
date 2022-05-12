@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { create } from "ipfs-http-client";
 const client = create("https://ipfs.infura.io:5001/api/v0");
 
-const Upload = () => {
+const Upload = ({sendDocs}) => {
   const [file, setFile] = useState(null);
   const [info, setInfo] = useState({
     name: "",
@@ -38,7 +38,9 @@ const Upload = () => {
       const date = `${current.getDate()}/${
         current.getMonth() + 1
       }/${current.getFullYear()}`;
-      console.log(file, hash, date, info.name);
+      console.log(file, hash, date, info.name,info.id);
+      sendDocs(hash,date,info.id,info.name);
+      
     } catch (e) {
       console.log("Error Uploading File", e);
     }
