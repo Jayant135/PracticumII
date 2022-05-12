@@ -25,9 +25,18 @@ function App() {
 
   const loadBlockchainData = async () => {
     const ethereum = window.ethereum;
-    const accounts = await ethereum.send("eth_requestAccounts");
-    const account = accounts[0];
-    setAccount(account);
+
+    try {
+      // Request account access if needed
+      const accounts = await ethereum.send("eth_requestAccounts");
+      const account = accounts.result[0];
+      console.log(account);
+      setAccount(account);
+      // Accounts now exposed, use them
+    } catch (error) {
+      // User denied account access
+      console.log(error);
+    }
     //connect smart contract with web3
     setLoader(false);
     setContract(Web3Data);
@@ -36,7 +45,6 @@ function App() {
   useEffect(() => {
     loadWeb3();
     loadBlockchainData();
-    console.log(contract, "this is contract");
   }, []);
 
   return (
