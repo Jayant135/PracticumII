@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { create } from "ipfs-http-client";
-import Web3Data from "../Web3Data";
 const client = create("https://ipfs.infura.io:5001/api/v0");
 
 const Upload = () => {
@@ -40,7 +39,6 @@ const Upload = () => {
         current.getMonth() + 1
       }/${current.getFullYear()}`;
       console.log(file, hash, date, info.name);
-      //Web3Data.methods.SendDocument.call(hash, date, info.id, info.name);
     } catch (e) {
       console.log("Error Uploading File", e);
     }
